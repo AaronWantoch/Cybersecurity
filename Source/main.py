@@ -1,3 +1,5 @@
+from asymmetric import Asymmetric
+a = Asymmetric()
 
-if __name__ == '__main__':
-    pass
+message = "encrypted data"
+a.RSA_encrypt(message, 2048)
