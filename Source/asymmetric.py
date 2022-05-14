@@ -1,2 +1,3 @@
 class Asymmetric:
-    pass
+    def a(self):
+        print("aaa")
