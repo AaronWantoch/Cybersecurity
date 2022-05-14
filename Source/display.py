@@ -30,19 +30,19 @@ class Display:
         # print(decrypted[0:baseLength])
         print("It took ", end - start, " s.")
 
-        @staticmethod
-        def displayMessageRSA(message, key_size):
-            start = time.time()
-            encrypted, private_key = Asymmetric.RSA_encrypt(message, key_size)
-            end = time.time()
-            print("AES encrypted message: ")
-            print(message)
-            print("It took ", end - start, " s.")
+    @staticmethod
+    def displayMessageRSA(message, key_size):
+        start = time.time()
+        encrypted, private_key = Asymmetric.RSA_encrypt(message, key_size)
+        end = time.time()
+        print("AES encrypted message: ")
+        print(message)
+        print("It took ", end - start, " s.")
 
-            start = time.time()
-            decrypted = Asymmetric.RSA_decrypt(encrypted, private_key)
-            end = time.time()
-            print("AES decrypted message. Decrypted message is: ")
-            print(decrypted)
-            print("It took ", end - start, " s.")
+        start = time.time()
+        decrypted = Asymmetric.RSA_decrypt(encrypted, private_key)
+        end = time.time()
+        print("AES decrypted message. Decrypted message is: ")
+        print(decrypted)
+        print("It took ", end - start, " s.")
 
