@@ -11,6 +11,7 @@ class Asymmetric:
      other variants, SHA 256 has been at the forefront of real-world applications
      -returns ciphertext - enctypted message, private_key -  private key generated from public key
     """
+
     def RSA_encrypt(self, message, key_size):
         messageByteFormat = bytes(message, 'utf-8')
         print(f"The string i want to encrypt: {messageByteFormat}.")
