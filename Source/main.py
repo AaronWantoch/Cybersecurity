@@ -1,5 +1,5 @@
-from asymmetric import Asymmetric
-a = Asymmetric()
+from display import Display
 
-message = "encrypted data"
-a.RSA_encrypt(message, 2048)
+if __name__ == '__main__':
+    Display.displayMessageAES(b"12345678901234561234567890123456")
+    
