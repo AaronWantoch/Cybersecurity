@@ -3,6 +3,7 @@ from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 
 
 class Symmetric:
+    #Link to article: https://cryptography.io/en/latest/hazmat/primitives/symmetric-encryption/#symmetric-encryption-modes
     @staticmethod
     def encryptAES(plainText, key, iv):
         cipher = Cipher(algorithms.AES(key), modes.CBC(iv))
