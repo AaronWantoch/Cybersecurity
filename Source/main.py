@@ -1,4 +1,6 @@
 from display import Display
+from utils import Utils
 
 if __name__ == '__main__':
-    Display.displayMessageAES("12345678901234561234567890123456erwsdgfawfdSGryltsdnugvcgkuukysndcxnhjguyfnyuxfskd xulicnw8sif;iu aewsodnhcdfilkdiogvjdsdigcylhisloisulnycgkclisgnyisldvhncrcgsklodfsicdofshgsldsiuofhbvdfs;uovhd;ofiuadghifu;aegwh'or;8gfp7aeribgvpayergy8q034wemFdzgfjhgkjhfgdsfadSADSAFDGFHGXFJKHGJLHJKGJGHFADafgsrhtrjy")
+    for i in [100000]:
+        Display.displayMessageAES(Utils.randomString(i))
