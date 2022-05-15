@@ -177,7 +177,7 @@ def calcAllTimes():
 
 if __name__ == '__main__':
     csvFileName = "CSV/AllTimes.csv"
-    csvColumnNames = ['ModeName', 'KeyLength', 'EncTime', 'DecTime']
-    csvRows = calcAllTimes()
-    saveCSVFileWithData(csvFileName, csvColumnNames, csvRows)
+    csvColumnNames = ['ModeName', 'KeyLength', 'EncTime', 'DecTime', 'EncDecRatio']
+    #csvRows = calcAllTimes()
+    #saveCSVFileWithData(csvFileName, csvColumnNames, csvRows)
     generateEncDecPlots(csvFileName, csvColumnNames)

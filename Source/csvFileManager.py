@@ -30,7 +30,8 @@ def calcTimeForCipherMode(func, modeName):
         else:
             enc_time, dec_time = func(key)
 
-        csvRows.append([modeName, str(i), str(enc_time), str(dec_time)])  # save to main CSV array
+        EncDecRatio = enc_time/dec_time
+        csvRows.append([modeName, str(i), str(enc_time), str(dec_time), str(EncDecRatio)])  # save to main CSV array
 
     print('\n')
     return csvRows
@@ -61,5 +62,26 @@ def generateEncDecPlots(csvFileName, csvColumnNames):
     print("Contents in csv file:\n", df)
     encPlot = generatePlot("Encryption", df)
     encPlot.savefig("Plots/Encryption_1.png")
+
     decPlot = generatePlot("Decryption", df)
-    encPlot.savefig("Plots/Decryption_1.png")
+    decPlot.savefig("Plots/Decryption_1.png")
+
+    ratioPlot = calcRatios(df)
+    ratioPlot.savefig("Plots/EncDecRatio_1.png")
+
+
+def calcRatios(df):
+    plt.clf()  # Clear figure --> prepare plt for new plot
+    numberOfCipherModes = 5
+    numberOfKeyLengths = 3
+    for i in range(numberOfCipherModes):
+        begin_ind = i * numberOfKeyLengths
+        end_ind = begin_ind + numberOfKeyLengths
+        lab = str(df.ModeName[begin_ind])
+        dotSize = 40
+        plt.scatter(df[begin_ind:end_ind].KeyLength, df[begin_ind:end_ind].EncDecRatio, label=lab, s=dotSize)
+    plt.legend(bbox_to_anchor=(1, 1), loc="upper left")
+    plt.title("Ratio between encryption and decryption time \n with various block cipher modes")
+    plt.xlabel("Key length")
+    plt.ylabel("Encryption/Decryption ratio")
+    return plt
