@@ -1,8 +1,6 @@
 import PIL.Image as Image
 from Crypto.Cipher import AES
-from Crypto.Random import get_random_bytes
-from Crypto.Util import Counter
-from Crypto.Util.number import bytes_to_long
+
 
 """
 Use only .png files
