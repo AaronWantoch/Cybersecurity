@@ -38,6 +38,7 @@ def calcTimeForCipherMode(func, modeName):
 
 def generatePlot(FeatureName, df):
     plt.clf()  # Clear figure --> prepare plt for new plot
+    plt.style.use('bmh')
     numberOfCipherModes = 5
     numberOfKeyLengths = 3
     for i in range(numberOfCipherModes):
@@ -72,6 +73,7 @@ def generateEncDecPlots(csvFileName, csvColumnNames):
 
 def calcRatios(df):
     plt.clf()  # Clear figure --> prepare plt for new plot
+    plt.style.use('bmh')
     numberOfCipherModes = 5
     numberOfKeyLengths = 3
     for i in range(numberOfCipherModes):
