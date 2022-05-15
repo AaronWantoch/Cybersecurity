@@ -1,5 +1,6 @@
 from ImageEncDecFunctions import *
 import datetime
+import csv
 
 def ECB_cipher_enc(key):
     img_to_enc = Image.open('Images/img_2.png')
@@ -71,10 +72,36 @@ def CTR_cipher(key, init_vector):
 
 
 if __name__ == '__main__':
-    key = get_random_bytes(16)  # value must be 16 bytes(128 bits), 24 bytes (192 bits) or 32 bytes (256 bits)
-    init_vector = get_random_bytes(16)
 
-    ECB_cipher(key)
-    CFB_cipher(key, init_vector)
-    CBC_cipher(key)
-    CTR_cipher(key, init_vector)
+    # initializing the titles and rows list
+    fields = ['Length', 'Time']
+    rows = []
+    for i in range(16,32+1,8):
+        print("i:",i)
+        key = get_random_bytes(i)  # value must be 16 bytes(128 bits), 24 bytes (192 bits) or 32 bytes (256 bits)
+        init_vector = get_random_bytes(16)
+
+        a = datetime.datetime.now()
+        CTR_cipher(key, init_vector)
+        b = datetime.datetime.now()
+
+        timeDiff = b - a
+
+        rows.append([str(i), str(timeDiff)]) # save to main array
+        # CFB_cipher(key, init_vector)
+        # CBC_cipher(key)
+        # CTR_cipher(key, init_vector)
+
+    filename = "CSV/CTR.csv"
+    # writing to csv file
+    with open(filename, 'w') as csvfile:
+        # creating a csv writer object
+        csvwriter = csv.writer(csvfile)
+
+        # writing the fields
+        csvwriter.writerow(fields)
+
+        # writing the data rows
+        csvwriter.writerows(rows)
+
+
