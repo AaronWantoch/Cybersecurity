@@ -152,7 +152,12 @@ cython_debug/
 #.idea/
 
 
+# Directory: Images
 *.png
 !img_5v2.png
 !img_4.png
 !img_2.png
+
+# Directory: Plots
+!Encryption_1.png
+!Decryption_1.png

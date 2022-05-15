@@ -1,8 +1,12 @@
+from Crypto.Util import Counter
+from Crypto.Util.number import bytes_to_long
+
 from ImageEncDecFunctions import *
 import datetime
 from csvFileManager import *
 
 imageName = 'img_5v2'
+
 
 def ECB_cipher_enc(key):
     beginTime = datetime.datetime.now()
@@ -12,7 +16,7 @@ def ECB_cipher_enc(key):
     saveImage(img_encrypted, "Images/" + imageName + "_ECB_enc.png")
 
     finishTime = datetime.datetime.now()
-    finalTime = finishTime - beginTime
+    finalTime = (finishTime - beginTime).total_seconds()
     return finalTime
 
 
@@ -24,7 +28,7 @@ def ECB_cipher_dec(key):
     saveImage(img_decrypted, "Images/" + imageName + "_ECB_dec.png")
 
     finishTime = datetime.datetime.now()
-    finalTime = finishTime - beginTime
+    finalTime = (finishTime - beginTime).total_seconds()
     return finalTime
 
 
@@ -43,7 +47,7 @@ def CBC_cipher_enc(key):
     saveImage(img_encrypted, "Images/" + imageName + "_CBC_enc.png")
 
     finishTime = datetime.datetime.now()
-    finalTime = finishTime - beginTime
+    finalTime = (finishTime - beginTime).total_seconds()
     return finalTime
 
 
@@ -55,7 +59,7 @@ def CBC_cipher_dec(key):
     saveImage(img_decrypted, "Images/" + imageName + "_CBC_dec.png")
 
     finishTime = datetime.datetime.now()
-    finalTime = finishTime - beginTime
+    finalTime = (finishTime - beginTime).total_seconds()
     return finalTime
 
 
@@ -66,9 +70,6 @@ def CBC_cipher(key):
     return enc_time, dec_time
 
 
-
-
-
 def OFB_cipher_enc(key, init_vector):
     beginTime = datetime.datetime.now()
 
@@ -77,7 +78,7 @@ def OFB_cipher_enc(key, init_vector):
     saveImage(img_encrypted, "Images/" + imageName + "_OFB_enc.png")
 
     finishTime = datetime.datetime.now()
-    finalTime = finishTime - beginTime
+    finalTime = (finishTime - beginTime).total_seconds()
     return finalTime
 
 
@@ -89,7 +90,7 @@ def OFB_cipher_dec(key, init_vector):
     saveImage(img_decrypted, "Images/" + imageName + "_OFB_dec.png")
 
     finishTime = datetime.datetime.now()
-    finalTime = finishTime - beginTime
+    finalTime = (finishTime - beginTime).total_seconds()
     return finalTime
 
 
@@ -100,8 +101,6 @@ def OFB_cipher(key, init_vector):
     return enc_time, dec_time
 
 
-
-
 def CFB_cipher_enc(key, init_vector):
     beginTime = datetime.datetime.now()
 
@@ -110,7 +109,7 @@ def CFB_cipher_enc(key, init_vector):
     saveImage(img_encrypted, "Images/" + imageName + "_CFB_enc.png")
 
     finishTime = datetime.datetime.now()
-    finalTime = finishTime - beginTime
+    finalTime = (finishTime - beginTime).total_seconds()
     return finalTime
 
 
@@ -122,7 +121,7 @@ def CFB_cipher_dec(key, init_vector):
     saveImage(img_decrypted, "Images/" + imageName + "_CFB_dec.png")
 
     finishTime = datetime.datetime.now()
-    finalTime = finishTime - beginTime
+    finalTime = (finishTime - beginTime).total_seconds()
     return finalTime
 
 
@@ -141,7 +140,7 @@ def CTR_cipher_enc(key, counter):
     saveImage(img_encrypted, "Images/" + imageName + "_CTR_enc.png")
 
     finishTime = datetime.datetime.now()
-    finalTime = finishTime - beginTime
+    finalTime = (finishTime - beginTime).total_seconds()
     return finalTime
 
 
@@ -153,7 +152,7 @@ def CTR_cipher_dec(key, counter):
     saveImage(img_decrypted, "Images/" + imageName + "_CTR_dec.png")
 
     finishTime = datetime.datetime.now()
-    finalTime = finishTime - beginTime
+    finalTime = (finishTime - beginTime).total_seconds()
     return finalTime
 
 
@@ -166,17 +165,19 @@ def CTR_cipher(key, init_vector):
     return enc_time, dec_time
 
 
-if __name__ == '__main__':
-    csvColumnNames = ['ModeName', 'KeyLength', 'EncTime', 'DecTime']
+def calcAllTimes():
     csvRows = []
     csvRows += calcTimeForCipherMode(ECB_cipher, "ECB")
     csvRows += calcTimeForCipherMode(CFB_cipher, "CFB")
     csvRows += calcTimeForCipherMode(OFB_cipher, "OFB")
     csvRows += calcTimeForCipherMode(CBC_cipher, "CBC")
     csvRows += calcTimeForCipherMode(CTR_cipher, "CTR")
+    return csvRows
 
-    saveCSVFileWithData(csvColumnNames, csvRows)
 
-    # CFB_cipher(key, init_vector)
-    # CBC_cipher(key)
-    # CTR_cipher(key, init_vector)
+if __name__ == '__main__':
+    csvFileName = "CSV/AllTimes.csv"
+    csvColumnNames = ['ModeName', 'KeyLength', 'EncTime', 'DecTime']
+    csvRows = calcAllTimes()
+    saveCSVFileWithData(csvFileName, csvColumnNames, csvRows)
+    generateEncDecPlots(csvFileName, csvColumnNames)
