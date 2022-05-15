@@ -7,6 +7,7 @@ from Crypto.Util.number import bytes_to_long
 """
 Use only .png files
 
+pixels --> length or width must be an even number, otherwise there will be an error
 """
 
 
