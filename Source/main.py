@@ -1,4 +1,8 @@
 from display import Display
+from utils import Utils
 
 if __name__ == '__main__':
-    Display.displayMessageAES(b"12345678901234561234567890123456")
+    Display.drawPlotsDES3()
+    Display.drawPlotsSalsa20()
+    Display.drawPlotsAES()
+
