@@ -144,6 +144,7 @@ class Display:
         print(decrypted)
         print("It took ", end - start, " s.")
 
+
     #RSA
     @staticmethod
     def drawPlotsRSA():
