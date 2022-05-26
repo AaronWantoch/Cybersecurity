@@ -100,7 +100,7 @@ class Display:
     def generateDataDES3(decryptionTimes, encryptionTimes, lenghts):
         for i in lenghts:
             randomText = Display.getPlaintext(i)
-            encryptionTime, decrytpionTime = Display.getTimeDES3(randomText, 21)
+            encryptionTime, decrytpionTime = Display.getTimeDES3(randomText, 24)
             encryptionTimes.append(encryptionTime)
             decryptionTimes.append(decrytpionTime)
 
