@@ -144,6 +144,99 @@ class Display:
         print(decrypted)
         print("It took ", end - start, " s.")
 
+    #RSA
+    @staticmethod
+    def drawPlotsRSA():
+        encryptionTimes = []
+        decryptionTimes = []
+        Display.generateDataRSA(decryptionTimes, encryptionTimes, Display.lenghts)
+
+        plt.title("RSA speed")
+        Display.drawPlots(decryptionTimes, encryptionTimes, Display.lenghts)
+
+    @staticmethod
+    def generateDataRSA(decryptionTimes, encryptionTimes, lenghts):
+        for i in lenghts:
+            randomText = Display.getPlaintext(i)
+            encryptionTime, decrytpionTime = Display.getTimeRSA(randomText, 256)
+            encryptionTimes.append(encryptionTime)
+            decryptionTimes.append(decrytpionTime)
+
+    @staticmethod
+    def getTimeRSA(text, keySize=2048):
+        start = time.time()
+        encryptedText, private_key = Asymmetric.encrypt_RSA(text, keySize)
+        end = time.time()
+        encryptionTime = end - start
+        start = time.time()
+        Asymmetric.decrypt_RSA(encryptedText, private_key)
+        end = time.time()
+        decryptionTime = end - start
+
+        return encryptionTime, decryptionTime
+
+    #ECC
+    @staticmethod
+    def drawPlotsECC():
+        encryptionTimes = []
+        decryptionTimes = []
+        Display.generateDataECC(decryptionTimes, encryptionTimes, Display.lenghts)
+
+        plt.title("ECC speed")
+        Display.drawPlots(decryptionTimes, encryptionTimes, Display.lenghts)
+
+    @staticmethod
+    def generateDataECC(decryptionTimes, encryptionTimes, lenghts):
+        for i in lenghts:
+            randomText = Display.getPlaintext(i)
+            encryptionTime, decrytpionTime = Display.getTimeECC(randomText, 256)
+            encryptionTimes.append(encryptionTime)
+            decryptionTimes.append(decrytpionTime)
+
+    @staticmethod
+    def getTimeECC(text):
+        start = time.time()
+        privKey, encryptedMsg = Asymmetric.encrypt_ECC(text)
+        end = time.time()
+        encryptionTime = end - start
+        start = time.time()
+        Asymmetric.decrypt_ECC(encryptedMsg, privKey)
+        end = time.time()
+        decryptionTime = end - start
+
+        return encryptionTime, decryptionTime
+
+    # ElGamal
+    @staticmethod
+    def drawPlotsElGamal():
+        encryptionTimes = []
+        decryptionTimes = []
+        Display.generateDataElGamal(decryptionTimes, encryptionTimes, Display.lenghts)
+
+        plt.title("ElGamal speed")
+        Display.drawPlots(decryptionTimes, encryptionTimes, Display.lenghts)
+
+    @staticmethod
+    def generateDataElGamal(decryptionTimes, encryptionTimes, lenghts):
+        for i in lenghts:
+            randomText = Display.getPlaintext(i)
+            encryptionTime, decrytpionTime = Display.getTimeElGamal(randomText, 256)
+            encryptionTimes.append(encryptionTime)
+            decryptionTimes.append(decrytpionTime)
+
+    @staticmethod
+    def getTimeElGamal(text):
+        start = time.time()
+        en_msg, pqkey = Asymmetric.encrypt_el_gamal(text)
+        end = time.time()
+        encryptionTime = end - start
+        start = time.time()
+        Asymmetric.decrypt_el_gamal(en_msg, pqkey)
+        end = time.time()
+        decryptionTime = end - start
+
+        return encryptionTime, decryptionTime
+
 
 
     # Gets bytes of text
