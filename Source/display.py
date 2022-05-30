@@ -106,12 +106,7 @@ class Display:
 
     @staticmethod
     def getTimeDES3(text, keySize = 24):
-        while True:
-            try:
-                key = DES3.adjust_key_parity(get_random_bytes(keySize))
-                break
-            except ValueError:
-                pass
+        key = Display.get_key_DES3(keySize)
 
         start = time.time()
         # print("Text to encrypt:" + str(text))
@@ -127,6 +122,16 @@ class Display:
 
 
         return encryptionTime, decryptionTime
+
+    @staticmethod
+    def get_key_DES3(keySize):
+        while True:
+            try:
+                key = DES3.adjust_key_parity(get_random_bytes(keySize))
+                break
+            except ValueError:
+                pass
+        return key
 
     @staticmethod
     def displayMessageRSA(message, key_size):
@@ -251,5 +256,6 @@ class Display:
         plt.legend()
         plt.xlabel("Length of text")
         plt.ylabel("time [s]")
+        plt.grid()
         plt.show()
 
